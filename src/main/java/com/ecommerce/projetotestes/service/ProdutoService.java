@@ -1,5 +1,7 @@
 package com.ecommerce.projetotestes.service;
 
+import com.ecommerce.projetotestes.exception.CampoVazioException;
+import com.ecommerce.projetotestes.exception.RegistroDuplicadoException;
 import com.ecommerce.projetotestes.model.Produto;
 import com.ecommerce.projetotestes.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,13 @@ public  class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public void criarProduto(Produto produto){
-        produtoRepository.save(produto);
+        if (produtoRepository.findByNome(produto.getNome()).isPresent()) {
+            throw new RegistroDuplicadoException();
+        } else if(produto.getNome().isEmpty() || produto.getDescricao().isEmpty() || produto.getPreco().equals(null)) {
+            throw new CampoVazioException();
+        } else {
+            produtoRepository.save(produto);
+        }
     }
 
     public List<Produto> listarTodos() {
@@ -30,15 +38,15 @@ public  class ProdutoService {
         this.produtoRepository.deleteById(id);
     }
 
-    public void atualizarProduto(Produto produtoAntigo) {
-        Produto produtoEstoque = produtoRepository.findById(produtoAntigo.getId()
+    public void atualizarProduto(Produto produtoDesatualizado) {
+        Produto produtoAtualizado = produtoRepository.findById(produtoDesatualizado.getId()
         ).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-        produtoEstoque.setNome(produtoAntigo.getNome());
-        produtoEstoque.setDescricao(produtoAntigo.getDescricao());
-        produtoEstoque.setPreco(produtoAntigo.getPreco());
+        produtoAtualizado.setNome(produtoDesatualizado.getNome());
+        produtoAtualizado.setDescricao(produtoDesatualizado.getDescricao());
+        produtoAtualizado.setPreco(produtoDesatualizado.getPreco());
 
-        produtoRepository.save(produtoEstoque);
+        produtoRepository.save(produtoAtualizado);
     }
 
 }

@@ -30,6 +30,10 @@ public class Carrinho {
     @ManyToOne
     @JoinColumn(name = "id_venda", referencedColumnName = "id")
     private Venda venda;
+    @ManyToOne
+    @JoinColumn(name = "id_produto", referencedColumnName = "id")
+    private Produto produto;
+
 
 
 }

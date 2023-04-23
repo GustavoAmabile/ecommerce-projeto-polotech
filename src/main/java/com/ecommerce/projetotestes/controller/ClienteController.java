@@ -19,6 +19,30 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    @GetMapping("/listar")
+    public List<Cliente> listarClientes(){
+        return clienteService.listarTodos();
+    }
+    @GetMapping("/buscar/{id}")
+    public Cliente buscarClientePorId(@PathVariable Long id){
+        return clienteService.buscarClientePorId(id).get();
+    }
+
+    @PostMapping("/criar")
+    public void inserirCliente(@RequestBody Cliente cliente){
+        clienteService.criarCliente(cliente);
+    }
+
+    @PutMapping("/atualizar")
+    public void atualizarCliente(@RequestBody Cliente cliente){
+        clienteService.atualizarCliente(cliente);
+    }
+
+    @DeleteMapping("/deletar/{id}")
+    public void deletarCliente(@PathVariable Long id){
+        clienteService.removerClientePorId(id);
+    }
+
 
 
 
