@@ -1,6 +1,7 @@
 package com.ecommerce.projetotestes.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,19 +23,20 @@ public class ItemVenda {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
-    private LocalDateTime dataVenda;
 
     @Column(nullable = false)
     private Integer quantidade;
+
+    @JsonIgnore
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_venda", nullable = false)
+    private Venda venda;
 
 }

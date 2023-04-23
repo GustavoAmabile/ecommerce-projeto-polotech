@@ -11,12 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/carrinho")
 public class CarrinhoController {
 
-    @Autowired
-    private CarrinhoService carrinhoService;
-
-    @GetMapping
-    public Carrinho getCarrinho(){
-        return carrinhoService.getCarrinho();
-    }
 
 }

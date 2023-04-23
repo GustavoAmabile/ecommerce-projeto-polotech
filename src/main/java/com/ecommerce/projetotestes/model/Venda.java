@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,14 +23,26 @@ public class Venda {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private LocalDateTime dataVenda;
-    @ManyToOne
-    @JoinColumn(name = "itens_venda_id")
-    private ItemVenda itensVenda;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_endereco", nullable = false)
+    private Endereco endereco;
 
-    private Double valorTotal;
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<ItemVenda> quantidadeItens = new ArrayList<>();
+
+    public List<ItemVenda> getQuantidadeItens() {
+        return quantidadeItens;
+    }
+
+    public void setQuantidadeItens(List<ItemVenda> quantidadeItens) {
+        this.quantidadeItens = quantidadeItens;
+    }
+
 
 }

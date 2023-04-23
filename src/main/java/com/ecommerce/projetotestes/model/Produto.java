@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "tb_venda")
+@Table(name = "tb_produto")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,7 +21,7 @@ import java.util.List;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -33,6 +33,9 @@ public class Produto {
 
     @Column(nullable = false)
     private Double preco;
+
+    @OneToOne(mappedBy = "produto", cascade = CascadeType.REMOVE, optional = false, orphanRemoval = true)
+    private Estoque estoque;
 
 
 

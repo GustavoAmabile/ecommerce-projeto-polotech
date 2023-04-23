@@ -7,17 +7,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VendaService {
-    @Autowired
-    private VendaRepository vendaRepository;
 
-    public VendaRepository getVendaRepository() {
-        return vendaRepository;
-    }
-
-    public void setVendaRepository(VendaRepository vendaRepository) {
-        this.vendaRepository = vendaRepository;
-    }
-    public void criarVenda(Venda venda) {
-        vendaRepository.save(venda);
-    }
 }
