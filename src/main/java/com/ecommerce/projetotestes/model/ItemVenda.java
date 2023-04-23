@@ -30,10 +30,7 @@ public class ItemVenda {
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
-
-    @Column(nullable = false)
     private Integer quantidade;
-
     @JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_venda", nullable = false)
