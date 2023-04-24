@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,9 +32,10 @@ public class ItemVenda {
     @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
     private Integer quantidade;
-    @JsonIgnore
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_venda", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_venda")
     private Venda venda;
+
+
 
 }

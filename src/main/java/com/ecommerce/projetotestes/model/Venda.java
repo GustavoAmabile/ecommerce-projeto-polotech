@@ -25,12 +25,11 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_cliente", nullable = false)
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
     private LocalDate dataVenda;
     private BigDecimal valorTotal;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_item_venda", nullable = false)
-    private ItemVenda itemVenda;
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    private List<ItemVenda> itensVenda ;
 
 }
