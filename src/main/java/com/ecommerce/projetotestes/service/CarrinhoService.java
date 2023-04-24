@@ -6,8 +6,11 @@ import com.ecommerce.projetotestes.model.*;
 import com.ecommerce.projetotestes.repository.CarrinhoRepository;
 import com.ecommerce.projetotestes.repository.ClienteRepository;
 import com.ecommerce.projetotestes.repository.ProdutoRepository;
+import com.ecommerce.projetotestes.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CarrinhoService {
@@ -25,15 +28,21 @@ public class CarrinhoService {
     private Produto produto;
     @Autowired
     private Cliente cliente;
-
+    @Autowired
+    private VendaRepository vendaRepository;
 
 
     public Carrinho criarCarrinho(Long idCliente, Long idVenda) {
         Carrinho carrinho = new Carrinho();
-        carrinho.setCliente(clienteRepository.findById(idCliente).orElseThrow(() -> new RuntimeException("Cliente não encontrado")));
-        carrinho.setVenda(venda);
-        carrinhoRepository.save(carrinho);
-        return carrinho;
+        Optional<Cliente> cliente =
+                clienteRepository.findById(idCliente);
+        Venda venda = new Venda();
+        Optional<Venda> vendaOptional =
+                vendaRepository.findById(idVenda);
+        carrinho.setCliente(cliente.get());
+        carrinho.setVenda(vendaOptional.get());
+        return carrinhoRepository.save(carrinho);
+
     }
 
 
