@@ -1,10 +1,7 @@
 package com.ecommerce.projetotestes.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -28,12 +25,6 @@ public class Produto {
     private String descricao;
     private BigDecimal preco;
     private Boolean emEstoque;
-
-
-
-
-
-
 
 
 

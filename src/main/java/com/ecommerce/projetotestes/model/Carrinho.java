@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -30,10 +32,6 @@ public class Carrinho {
     @ManyToOne
     @JoinColumn(name = "id_venda", referencedColumnName = "id")
     private Venda venda;
-    @ManyToOne
-    @JoinColumn(name = "id_produto", referencedColumnName = "id")
-    private Produto produto;
-
 
 
 }
