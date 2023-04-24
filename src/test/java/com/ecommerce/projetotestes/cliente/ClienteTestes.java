@@ -33,6 +33,12 @@ public class ClienteTestes {
     private ClienteService clienteService;
     @Autowired
     private CarrinhoRepository carrinhoRepository;
+    @Test
+    public void criarCarrinhoTeste() {
+        carrinhoService.criarCarrinho(1L, 1L);
+        assertEquals(1, carrinhoRepository.count());
+    }
+
 
 
 }
