@@ -32,7 +32,7 @@ public class CarrinhoService {
     private VendaRepository vendaRepository;
 
 
-    public Carrinho criarCarrinho(Long idCliente, Long idVenda) {
+    public void criarCarrinho(Long idCliente, Long idVenda) {
         Carrinho carrinho = new Carrinho();
         Optional<Cliente> cliente =
                 clienteRepository.findById(idCliente);
@@ -41,7 +41,7 @@ public class CarrinhoService {
                 vendaRepository.findById(idVenda);
         carrinho.setCliente(cliente.get());
         carrinho.setVenda(vendaOptional.get());
-        return carrinhoRepository.save(carrinho);
+        carrinhoRepository.save(carrinho);
 
     }
 

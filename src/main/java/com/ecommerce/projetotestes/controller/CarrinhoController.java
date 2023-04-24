@@ -14,9 +14,9 @@ public class CarrinhoController {
     private CarrinhoService carrinhoService;
 
 
-    @PostMapping("/criar/{idCliente}")
-    public Carrinho criarCarrinho(@PathVariable Long idCliente, @PathVariable Long idVenda){
-        return carrinhoService.criarCarrinho(idCliente, idVenda);
+    @PostMapping("/criar/{idCliente}/{idVenda}")
+    public void criarCarrinho(@PathVariable Long idCliente, @PathVariable Long idVenda){
+         carrinhoService.criarCarrinho(idCliente, idVenda);
     }
 
 
